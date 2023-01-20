@@ -1,0 +1,11 @@
+.squares {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+ }
+ .square {
+  height: 100px;
+  flex-grow: 1;
+ }

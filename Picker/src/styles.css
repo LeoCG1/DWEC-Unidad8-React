@@ -1,0 +1,12 @@
+.inputs{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+#hueInput, #satuInput{
+    display: flex;
+    flex-direction: row;
+}
+#cuadrohue{
+    margin-top: 5em;
+}
