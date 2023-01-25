@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function Hue(props ){
     const {onChange} = props;
-    const [hue, setHue] = useState();
+    const [hue, setHue] = useState(170);
     onChange(hue);
     return (
       <div id="hueInput">

@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function Satu(props){
   const {onChange} = props;
-  const [sat, setSat] = useState();
+  const [sat, setSat] = useState(70);
   onChange(sat);
     return (
       <div id="satuInput">

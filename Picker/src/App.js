@@ -4,24 +4,29 @@ import './styles.css'
 import Hue from './hue';
 import Satu from './saturation';
 import Steps from './steps';
+import { useState } from "react";
+
 
 function App(){
+  const [hue, setHue] = useState();
+  const [sat, setSat] = useState();
+  const [step, setSteps] = useState();
   return (
     <div className="inputs">
-    <Hue/>
-    <Satu/>
-    <Steps/>
+    <Hue onChange={value => setHue(value)}/>
+    <Satu onChange={value => setSat(value)}/>
+    <Steps onChange={value => setSteps(value)}/>
     <div id="cuadrohue">
     <label>Hue: </label>
-    <output id="valHue">0</output>
+    <output>{hue}</output>
     </div>
     <div id="cuadroSatu">
     <label>Saturation: </label>
-    <output id="valSatu">0</output>
+    <output>{sat}</output>
     </div>
     <div id="cuadroSteps">
     <label>Steps: </label>
-    <output id="valSteps">0</output>
+    <output>{step}</output>
     </div>
     </div>
   )

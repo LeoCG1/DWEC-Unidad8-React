@@ -4,7 +4,7 @@ import { useState } from "react";
 
  function Steps(props){
   const {onChange} = props;
-  const [step, setStep] = useState();
+  const [step, setStep] = useState(5);
   onChange(step);
     return (
       <div id="stepsInput">
