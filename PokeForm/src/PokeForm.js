@@ -2,12 +2,11 @@ const DEFAULT_LANGUAGE = '7' // Español
 import { getPokemonData, getSpeciesSprite } from "./pokemon_api";
 import { useState, useEffect } from "react";
 function pokemonsInLanguage(pokemons, language) {
-  if(pokemons.local_language_id === language){
-    return pokemons.name
-  }
+  return pokemons?.filter(pokemon => pokemon.local_language_id === language)
 }
 
-function PokeForm() {
+function PokeForm(props) {
+  const {enviar} = props;
   const [inputNombre, setNombre] = useState('');
   const [selectLang, setLang] = useState(DEFAULT_LANGUAGE);
   const [pokedata, setPokedata] = useState([]);
@@ -15,19 +14,14 @@ function PokeForm() {
   useEffect(() => {
     async function load(){
       let datos = await getPokemonData();
-      setPokedata(datos);
+      setPokedata(pokemonsInLanguage(datos, selectLang));
     }
     load()
   })
   function handleClick(e){
     e.preventDefault();
-    Object.entries(pokedata).forEach(([key, value])=> {
-      if(value.name === inputNombre && value.local_language_id === selectLang){
-        console.log('Pokemon con idioma correcto');
-      }else{
-        throw `No se ha encontrado el Pokemon`;
-      }
-    })
+    let pokemon = pokedata?.find(pokemon => pokemon.name === inputNombre )
+    pokemon ? enviar(pokemon.pokemon_species_id) : null;
   }
 
   return (
@@ -39,7 +33,7 @@ function PokeForm() {
           <input type="text" name="name" list="pokemons" value={inputNombre} onChange={(e) => setNombre(e.target.value)}/>
         </label>
         <datalist id="pokemons">
-           { pokedata.map((pokemon) => <option value={pokemonsInLanguage(pokemon, selectLang)}></option>) }
+        { pokedata.map(pokemon => <option key={pokemon.pokemon_species_id} value={pokemon.name}></option>) }
         </datalist>
         <label>
           Lenguaje
@@ -49,7 +43,7 @@ function PokeForm() {
             <option value="6">Alemán</option>
           </select>
         </label>
-        <input type="submit" value="Search" onClick={handleClick}/>
+        <input type="submit" value="Search" onClick={(e) => handleClick(e, inputNombre)}/>
       </form>
     </div>
   )

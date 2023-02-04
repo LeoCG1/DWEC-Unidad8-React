@@ -3,7 +3,7 @@ import PokeForm from './PokeForm';
 
 function App(){
     return(
-        <PokeForm />
+        <PokeForm  cogerID={id}/>
     )
 }
 export default App;
